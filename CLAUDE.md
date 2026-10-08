@@ -26,5 +26,7 @@ here — do not report those as skipped or passing.
 - `privacy.html` — Word-exported privacy policy, served outside the SPA. Large and
   machine-generated markup; edit narrowly.
 - `CNAME` — custom domain. Removing it breaks the domain mapping.
-- `_redirects` — `/* /index.html 200`, required for the SPA's `/about` route to survive a
-  direct load or refresh.
+- `_redirects` — `/* /index.html 200`. This is a Netlify/Cloudflare Pages convention and is
+  **ineffective on GitHub Pages**. With no `404.html` fallback, `/about` returns HTTP 404 on a
+  direct load or refresh (verified against the live site); it only works via in-app
+  navigation. Do not describe this file as working SPA routing.

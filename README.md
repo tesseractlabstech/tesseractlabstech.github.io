@@ -16,19 +16,30 @@ and the resulting bundle is committed here to be served.
 | `assets/` | Generated bundles (`index.<hash>.js`, `index.<hash>.css`), favicon, logos, and imagery |
 | `privacy.html` | Standalone privacy policy page, exported from Microsoft Word (outside the SPA) |
 | `CNAME` | Custom domain for GitHub Pages: `tesseractlabs.tech` |
-| `_redirects` | SPA rewrite rule (`/* /index.html 200`) so client-side routes resolve on refresh |
+| `_redirects` | Netlify/Cloudflare-style SPA rewrite rule (`/* /index.html 200`) — **not honoured by GitHub Pages**; see below |
 
 ## The site
 
-A React single-page app with client-side routes `/` and `/about`, plus a not-found view.
-Content positions Tesseract Labs as a partner across "the trio — data, web3 and security",
-organised into three pillars:
+A React single-page app with client-side routes `/` and `/about`, plus a catch-all not-found
+view. Content positions Tesseract Labs as a partner across "the trio - data, web3 and
+security", with six service cards:
 
-- **Data** — Modern Data Design and Analytics Engineering
-- **Web3** — Zero-Knowledge Applications (circom, halo2) and DApp development for EVM chains
-- **Security** — Access Management, plus Identity and Authentication
+- Modern Data Design
+- Analytics Engineering
+- Zero-Knowledge Application (circom, halo2)
+- DApp Development (full stack, web UI to smart contract, EVM-based blockchains)
+- Access Management
+- Identity and Authentication
 
 Contact address shown on the site: `info@tesseractlabs.tech`.
+
+### Known issue: `/about` 404s on direct load
+
+`_redirects` is a Netlify/Cloudflare Pages file. GitHub Pages ignores it, and there is no
+`404.html` fallback in this repo, so only `/` resolves on a direct request —
+`https://tesseractlabs.tech/about` returns HTTP 404. The route works only via in-app
+navigation from `/`. Fixing it means adding a `404.html` that serves the SPA shell (the
+standard GitHub Pages workaround), which belongs in the source repo's build.
 
 ## Making changes
 
